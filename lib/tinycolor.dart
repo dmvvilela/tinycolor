@@ -156,7 +156,7 @@ class TinyColor {
     return TinyColor.fromHSL(hsl);
   }
 
-  Color? get color {
+  Color get color {
     return _color;
   }
 }
