@@ -2,7 +2,6 @@ import 'dart:math' as Math;
 import 'dart:ui';
 
 import 'package:flutter/painting.dart';
-import 'package:meta/meta.dart';
 import 'package:pigment/pigment.dart';
 
 import 'conversion.dart';
@@ -16,15 +15,14 @@ class TinyColor {
   Color originalColor;
   Color _color;
 
-  TinyColor(Color color) {
-    this.originalColor =
-        Color.fromARGB(color.alpha, color.red, color.green, color.blue);
-    this._color =
-        Color.fromARGB(color.alpha, color.red, color.green, color.blue);
-  }
+  TinyColor(Color color)
+      : originalColor =
+            Color.fromARGB(color.alpha, color.red, color.green, color.blue),
+        _color =
+            Color.fromARGB(color.alpha, color.red, color.green, color.blue);
 
   factory TinyColor.fromRGB(
-      {@required int r, @required int g, @required int b, int a = 100}) {
+      {required int r, required int g, required int b, int a = 100}) {
     return TinyColor(Color.fromARGB(a, r, g, b));
   }
 
@@ -49,7 +47,8 @@ class TinyColor {
   }
 
   double getBrightness() {
-    return (_color.red * 299 + _color.green * 587 + _color.blue * 114) / 1000;
+    return (_color.red * 299 + _color.green * 587 + _color.blue * 114) /
+        1000;
   }
 
   double getLuminance() {
@@ -97,7 +96,8 @@ class TinyColor {
       Math.max(0, Math.min(255, _color.red - (255 * -(amount / 100)).round())),
       Math.max(
           0, Math.min(255, _color.green - (255 * -(amount / 100)).round())),
-      Math.max(0, Math.min(255, _color.blue - (255 * -(amount / 100)).round())),
+      Math.max(
+          0, Math.min(255, _color.blue - (255 * -(amount / 100)).round())),
     );
     return TinyColor(color);
   }
@@ -142,7 +142,7 @@ class TinyColor {
     return TinyColor.fromHSL(hsl);
   }
 
-  TinyColor mix({@required Color input, int amount = 50}) {
+  TinyColor mix({required Color input, int amount = 50}) {
     final int p = (amount / 100).round();
     final color = Color.fromARGB(
         (input.alpha - _color.alpha) * p + _color.alpha,
@@ -158,7 +158,7 @@ class TinyColor {
     return TinyColor.fromHSL(hsl);
   }
 
-  Color get color {
+  Color? get color {
     return _color;
   }
 }
