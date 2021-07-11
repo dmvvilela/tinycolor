@@ -47,8 +47,7 @@ class TinyColor {
   }
 
   double getBrightness() {
-    return (_color.red * 299 + _color.green * 587 + _color.blue * 114) /
-        1000;
+    return (_color.red * 299 + _color.green * 587 + _color.blue * 114) / 1000;
   }
 
   double getLuminance() {
@@ -96,8 +95,7 @@ class TinyColor {
       Math.max(0, Math.min(255, _color.red - (255 * -(amount / 100)).round())),
       Math.max(
           0, Math.min(255, _color.green - (255 * -(amount / 100)).round())),
-      Math.max(
-          0, Math.min(255, _color.blue - (255 * -(amount / 100)).round())),
+      Math.max(0, Math.min(255, _color.blue - (255 * -(amount / 100)).round())),
     );
     return TinyColor(color);
   }
@@ -110,11 +108,11 @@ class TinyColor {
   }
 
   TinyColor tint([int amount = 10]) {
-    return this.mix(input: Color.fromRGBO(255, 255, 255, 1.0));
+    return this.mix(input: Color.fromRGBO(255, 255, 255, 1.0), amount: amount);
   }
 
   TinyColor shade([int amount = 10]) {
-    return this.mix(input: Color.fromRGBO(0, 0, 0, 1.0));
+    return this.mix(input: Color.fromRGBO(0, 0, 0, 1.0), amount: amount);
   }
 
   TinyColor desaturate([int amount = 10]) {
@@ -143,12 +141,12 @@ class TinyColor {
   }
 
   TinyColor mix({required Color input, int amount = 50}) {
-    final int p = (amount / 100).round();
+    final p = amount / 100;
     final color = Color.fromARGB(
-        (input.alpha - _color.alpha) * p + _color.alpha,
-        (input.red - _color.red) * p + _color.red,
-        (input.green - _color.green) * p + _color.green,
-        (input.blue - _color.blue) * p + _color.blue);
+        ((input.alpha - _color.alpha) * p + _color.alpha).round(),
+        ((input.red - _color.red) * p + _color.red).round(),
+        ((input.green - _color.green) * p + _color.green).round(),
+        ((input.blue - _color.blue) * p + _color.blue).round());
     return TinyColor(color);
   }
 
